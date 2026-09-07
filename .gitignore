@@ -1,0 +1,22 @@
+# Gradle
+.gradle/
+build/
+local.properties
+
+# Keystore — NEVER commit (losing it means no future updates)
+keystore/
+
+# IDE
+.idea/
+*.iml
+.vscode/
+.kotlin/
+
+# Android
+captures/
+.externalNativeBuild/
+.cxx/
+
+# OS
+.DS_Store
+Thumbs.db

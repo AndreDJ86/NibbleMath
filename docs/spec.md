@@ -175,8 +175,8 @@ Survives an update: everything. Survives a reinstall: only via JSON export/impor
 | Price lookup | OkHttp + per-store adapters (Woolworths, Coles, ALDI) | the only network feature |
 | Packaging / distribution | Gradle → APK (UAT) / AAB (Play); fastlane internal track | per playbook |
 
-Package `com.andredj86.nibblemath`; minSdk 26; targetSdk 36 (bump annually per
-Play deadline).
+Package `com.andre.nibblemath` (immutable once published); minSdk 26; targetSdk
+36 (bump annually per Play deadline).
 
 ## 6. Out of scope
 

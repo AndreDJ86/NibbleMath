@@ -187,3 +187,11 @@ Package `com.andre.nibblemath` (immutable once published); minSdk 26; targetSdk
 - Pantry inventory (quantities on hand, expiry)
 - Non-AU stores/regions
 - Sharing recipes with other people
+
+## Stage 0 exit criteria
+
+- [x] Spec agreed
+- [x] Repo exists (local + GitHub)
+- [ ] Play Console app ID reserved — blocked: developer account registered,
+      verification pending (owner action; reserve `com.andre.nibblemath` once
+      verified, StreamScout's `com.andre.streamscout` is pending the same way)

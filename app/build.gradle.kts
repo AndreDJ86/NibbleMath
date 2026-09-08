@@ -7,11 +7,11 @@ plugins {
 }
 
 android {
-    namespace = "com.andre.nibblemath"
+    namespace = "com.loopworks.nibblemath"
     compileSdk = 37
 
     defaultConfig {
-        applicationId = "com.andre.nibblemath"
+        applicationId = "com.loopworks.nibblemath"
         minSdk = 26
         targetSdk = 37
         versionCode = providers.environmentVariable("VERSION_CODE").map { it.toInt() }.getOrElse(1)

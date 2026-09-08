@@ -74,7 +74,7 @@ heart of the app — get it right before any UI.
 Signed release APK → real phone via scrcpy → playbook §6.2 checklist →
 sign-off recorded → tag `vX.Y.0`.
 
-## Stage 5 — Play (blocked on account verification)
+## Stage 5 — Play
 
 Prep now (no verification needed):
 
@@ -83,9 +83,9 @@ Prep now (no verification needed):
 - Privacy policy URL (host in Projects repo or GitHub Pages)
 - Data safety form: no data collected; network use = ingredient price lookup
 
-After verification:
+Remaining (account verified 2026-09-08):
 
-1. Reserve `com.andre.nibblemath` (and `com.andre.streamscout`)
+1. App ID reserved — done: `com.loopworks.nibblemath` created (`com.andre.streamscout` still pending)
 2. CI: tag → signed AAB → fastlane internal track (service account secrets)
 3. Promote internal → closed → production (staged 10 → 50 → 100)
 

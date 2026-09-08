@@ -175,7 +175,7 @@ Survives an update: everything. Survives a reinstall: only via JSON export/impor
 | Price lookup | OkHttp + per-store adapters (Woolworths, Coles, ALDI) | the only network feature |
 | Packaging / distribution | Gradle → APK (UAT) / AAB (Play); fastlane internal track | per playbook |
 
-Package `com.andre.nibblemath` (immutable once published); minSdk 26; targetSdk
+Package `com.loopworks.nibblemath` (immutable once published); minSdk 26; targetSdk
 37 (bump annually per Play deadline).
 
 ## 6. Out of scope
@@ -192,6 +192,6 @@ Package `com.andre.nibblemath` (immutable once published); minSdk 26; targetSdk
 
 - [x] Spec agreed
 - [x] Repo exists (local + GitHub)
-- [ ] Play Console app ID reserved — blocked: developer account registered,
-      verification pending (owner action; reserve `com.andre.nibblemath` once
-      verified, StreamScout's `com.andre.streamscout` is pending the same way)
+- [x] Play Console app ID reserved — `com.loopworks.nibblemath` created
+      2026-09-08 (developer account verified). StreamScout's
+      `com.andre.streamscout` is still pending verification.

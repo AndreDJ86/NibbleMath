@@ -1,0 +1,5 @@
+<resources>
+    <string name="app_name">NibbleMath</string>
+    <string name="books_empty_title">No recipe books yet</string>
+    <string name="books_empty_hint">Create a book to start collecting recipes.</string>
+</resources>

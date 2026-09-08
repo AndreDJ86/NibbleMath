@@ -176,7 +176,7 @@ Survives an update: everything. Survives a reinstall: only via JSON export/impor
 | Packaging / distribution | Gradle → APK (UAT) / AAB (Play); fastlane internal track | per playbook |
 
 Package `com.andre.nibblemath` (immutable once published); minSdk 26; targetSdk
-36 (bump annually per Play deadline).
+37 (bump annually per Play deadline).
 
 ## 6. Out of scope
 

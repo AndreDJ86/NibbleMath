@@ -1,0 +1,11 @@
+default_platform(:android)
+
+platform :android do
+  lane :upload_internal do
+    supply(
+      track: "internal",
+      aab: "app/build/outputs/bundle/release/app-release.aab",
+      json_key: ENV["GOOGLE_PLAY_SERVICE_ACCOUNT_JSON"]
+    )
+  end
+end

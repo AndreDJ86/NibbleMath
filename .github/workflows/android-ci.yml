@@ -1,0 +1,50 @@
+name: android-ci
+
+on:
+  pull_request:
+  push:
+    tags: ["v*"]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: "17"
+      - uses: gradle/actions/setup-gradle@v4
+
+      - name: Build, lint, unit tests
+        run: ./gradlew build lintDebug
+
+      - name: Version from tag
+        if: startsWith(github.ref, 'refs/tags/')
+        id: ver
+        run: |
+          IFS=. read -r M m p <<< "${GITHUB_REF#refs/tags/v}"
+          echo "version_code=$((M*10000 + m*100 + p))" >> "$GITHUB_OUTPUT"
+          echo "version_name=${GITHUB_REF#refs/tags/v}" >> "$GITHUB_OUTPUT"
+
+      - name: Decode upload keystore
+        if: startsWith(github.ref, 'refs/tags/')
+        run: mkdir -p keystore && echo "${{ secrets.KEYSTORE_BASE64 }}" | base64 -d > keystore/upload.jks
+
+      - name: Signed AAB
+        if: startsWith(github.ref, 'refs/tags/')
+        env:
+          VERSION_CODE: ${{ steps.ver.outputs.version_code }}
+          VERSION_NAME: ${{ steps.ver.outputs.version_name }}
+          KEYSTORE_PASSWORD: ${{ secrets.KEYSTORE_PASSWORD }}
+          KEY_ALIAS: ${{ secrets.KEY_ALIAS }}
+          KEY_ALIAS_PASSWORD: ${{ secrets.KEY_ALIAS_PASSWORD }}
+        run: ./gradlew bundleRelease
+
+      - name: Upload to internal track
+        if: startsWith(github.ref, 'refs/tags/')
+        env:
+          GOOGLE_PLAY_SERVICE_ACCOUNT_JSON: ${{ secrets.PLAY_SERVICE_JSON }}
+        run: |
+          gem install fastlane --no-document
+          fastlane android upload_internal

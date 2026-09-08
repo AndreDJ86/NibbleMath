@@ -17,7 +17,7 @@ on the emulator.
 | 0.1 | Project scaffold | Gradle (Kotlin DSL), Kotlin + Jetpack Compose (Material3), single activity + Compose Navigation skeleton, theme, `minSdk 26` / `targetSdk 37`, versioning from git tag (`versionCode = M*10000+m*100+p`), `gradle.properties` (`-Xmx2g`, no JDK pin — AGP 9.4.0 works on the system JDK), CI workflow (PR: build + lint + unit tests) | `./gradlew build` green in CI; debug APK installs and runs on the Pixel AVD |
 | 0.2 | Keystore | `keytool -genkeypair` → `keystore/upload.jks` (RSA 2048, 10000 days, alias `upload`); backed up twice offline; never committed | `keytool -list` succeeds on a backup copy |
 
-## Phase 1 — Domain core · ~3 days
+## Phase 1 — Domain core · ~3 days — done 2026-09-08
 
 Pure Kotlin module, zero Android dependencies, 100% unit-tested. This is the
 heart of the app — get it right before any UI.

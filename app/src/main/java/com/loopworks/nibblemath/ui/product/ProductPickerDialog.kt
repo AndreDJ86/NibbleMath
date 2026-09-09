@@ -138,7 +138,7 @@ fun ProductPickerDialog(
         onDismissRequest = onDismiss,
         title = { Text(title) },
         text = {
-            Column(Modifier.verticalScroll(rememberScrollState())) {
+            Column(Modifier.verticalScroll(rememberScrollState()).testTag("product_dialog_scroll")) {
                 OutlinedTextField(
                     value = search,
                     onValueChange = { search = it },
@@ -265,6 +265,7 @@ fun ProductPickerDialog(
                         onValueChange = { name = it },
                         label = { Text(stringResource(R.string.product_picker_name_label)) },
                         singleLine = true,
+                        modifier = Modifier.testTag("product_name"),
                     )
                     Spacer(Modifier.height(8.dp))
                     OutlinedTextField(
@@ -273,6 +274,7 @@ fun ProductPickerDialog(
                         label = { Text(stringResource(R.string.product_picker_pack_label)) },
                         singleLine = true,
                         keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Decimal),
+                        modifier = Modifier.testTag("product_pack"),
                     )
                     Spacer(Modifier.height(8.dp))
                     OutlinedTextField(
@@ -281,6 +283,7 @@ fun ProductPickerDialog(
                         label = { Text(stringResource(R.string.product_picker_price_label)) },
                         singleLine = true,
                         keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Decimal),
+                        modifier = Modifier.testTag("product_price"),
                     )
                     Spacer(Modifier.height(8.dp))
                     Button(
@@ -301,6 +304,7 @@ fun ProductPickerDialog(
                             }
                         },
                         enabled = canSave && !saving,
+                        modifier = Modifier.testTag("product_save"),
                     ) {
                         Text(stringResource(R.string.product_picker_save))
                     }

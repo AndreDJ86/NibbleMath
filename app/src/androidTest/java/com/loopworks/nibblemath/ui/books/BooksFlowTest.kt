@@ -1,11 +1,11 @@
 package com.loopworks.nibblemath.ui.books
 
 import androidx.compose.ui.test.ExperimentalTestApi
-import androidx.compose.ui.test.assertDisplayed
-import androidx.compose.ui.test.hasEditableText
+import androidx.compose.ui.test.assertIsDisplayed
+import androidx.compose.ui.test.isEditable
 import androidx.compose.ui.test.junit4.createAndroidComposeRule
-import androidx.compose.ui.test.onAllNodes
 import androidx.compose.ui.test.onAllNodesWithText
+import androidx.compose.ui.test.onFirst
 import androidx.compose.ui.test.onNodeWithText
 import androidx.compose.ui.test.performClick
 import androidx.compose.ui.test.performTextInput
@@ -41,12 +41,12 @@ class BooksFlowTest : AppTestBase() {
             }
         }
         composeRule.waitForIdle()
-        composeRule.onNodeWithText("No recipe books yet").assertDisplayed()
+        composeRule.onNodeWithText("No recipe books yet").assertIsDisplayed()
         composeRule.onAllNodesWithText("Add book").onFirst().performClick()
-        composeRule.onAllNodes(hasEditableText()).onFirst().performTextInput("Bakes")
+        composeRule.onAllNodes(isEditable()).onFirst().performTextInput("Bakes")
         composeRule.onNodeWithText("Save").performClick()
         composeRule.waitForIdle()
-        composeRule.onAllNodesWithText("Bakes").onFirst().assertDisplayed()
+        composeRule.onAllNodesWithText("Bakes").onFirst().assertIsDisplayed()
         assertEquals(1, books.books().size)
     }
 
@@ -71,9 +71,9 @@ class BooksFlowTest : AppTestBase() {
             }
         }
         composeRule.waitForIdle()
-        composeRule.onAllNodesWithText("Bakes").onFirst().assertDisplayed()
-        composeRule.onNodeWithText("Cake").assertDisplayed()
-        composeRule.onNodeWithText("1.00/batch", substring = true).assertDisplayed()
-        composeRule.onNodeWithText("0.50/tray", substring = true).assertDisplayed()
+        composeRule.onAllNodesWithText("Bakes").onFirst().assertIsDisplayed()
+        composeRule.onNodeWithText("Cake").assertIsDisplayed()
+        composeRule.onNodeWithText("1.00/batch", substring = true).assertIsDisplayed()
+        composeRule.onNodeWithText("0.50/tray", substring = true).assertIsDisplayed()
     }
 }

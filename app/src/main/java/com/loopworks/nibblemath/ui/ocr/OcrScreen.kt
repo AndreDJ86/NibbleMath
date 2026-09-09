@@ -71,6 +71,7 @@ fun OcrScreen(
     bookId: Long,
     onBack: () -> Unit,
     onSaved: (Long) -> Unit,
+    initialDraft: RecipeDraft? = null,
 ) {
     val context = LocalContext.current
     val scope = rememberCoroutineScope()
@@ -80,7 +81,7 @@ fun OcrScreen(
     var imageFile by remember { mutableStateOf<File?>(null) }
     var bitmap by remember { mutableStateOf<Bitmap?>(null) }
     var ocrText by remember { mutableStateOf<String?>(null) }
-    var draft by remember { mutableStateOf<RecipeDraft?>(null) }
+    var draft by remember { mutableStateOf(initialDraft) }
     var ocrLoading by remember { mutableStateOf(false) }
     var ocrError by remember { mutableStateOf(false) }
     var saving by remember { mutableStateOf(false) }
@@ -204,7 +205,9 @@ fun OcrScreen(
         if (file == null) {
             bitmap = null
             ocrText = null
-            draft = null
+            if (initialDraft == null) {
+                draft = null
+            }
             ocrLoading = false
             ocrError = false
             return@LaunchedEffect
@@ -259,22 +262,24 @@ fun OcrScreen(
             verticalArrangement = Arrangement.spacedBy(12.dp),
         ) {
             if (currentFile == null) {
-                Text(
-                    text = stringResource(R.string.ocr_no_image),
-                    style = MaterialTheme.typography.bodyLarge,
-                )
-                Spacer(modifier = Modifier.height(8.dp))
-                Button(
-                    onClick = ::startCamera,
-                    modifier = Modifier.fillMaxWidth(),
-                ) {
-                    Text(stringResource(R.string.ocr_take_photo))
-                }
-                OutlinedButton(
-                    onClick = { galleryLauncher.launch(arrayOf("image/*")) },
-                    modifier = Modifier.fillMaxWidth(),
-                ) {
-                    Text(stringResource(R.string.ocr_choose_gallery))
+                if (initialDraft == null) {
+                    Text(
+                        text = stringResource(R.string.ocr_no_image),
+                        style = MaterialTheme.typography.bodyLarge,
+                    )
+                    Spacer(modifier = Modifier.height(8.dp))
+                    Button(
+                        onClick = ::startCamera,
+                        modifier = Modifier.fillMaxWidth(),
+                    ) {
+                        Text(stringResource(R.string.ocr_take_photo))
+                    }
+                    OutlinedButton(
+                        onClick = { galleryLauncher.launch(arrayOf("image/*")) },
+                        modifier = Modifier.fillMaxWidth(),
+                    ) {
+                        Text(stringResource(R.string.ocr_choose_gallery))
+                    }
                 }
             } else {
                 if (currentBitmap != null) {
@@ -328,63 +333,63 @@ fun OcrScreen(
                             style = MaterialTheme.typography.bodySmall,
                         )
                     }
-                    val current = currentDraft
-                    if (current != null) {
-                        Text(
-                            text = stringResource(R.string.ocr_draft_title),
-                            style = MaterialTheme.typography.titleMedium,
-                        )
-                        OutlinedTextField(
-                            value = current.name,
-                            onValueChange = { value -> updateDraft { it.copy(name = value) } },
-                            label = { Text(stringResource(R.string.recipe_name_label)) },
-                            modifier = Modifier.fillMaxWidth(),
-                        )
-                        Row(horizontalArrangement = Arrangement.spacedBy(12.dp)) {
-                            OutlinedTextField(
-                                value = current.yieldText,
-                                onValueChange = { value -> updateDraft { it.copy(yieldText = value) } },
-                                label = { Text(stringResource(R.string.recipe_yield_label)) },
-                                keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Decimal),
-                                modifier = Modifier.weight(1f),
-                            )
-                            OutlinedTextField(
-                                value = current.yieldItem,
-                                onValueChange = { value -> updateDraft { it.copy(yieldItem = value) } },
-                                label = { Text(stringResource(R.string.recipe_yield_item_label)) },
-                                modifier = Modifier.weight(1f),
-                            )
-                        }
-                        Spacer(modifier = Modifier.height(12.dp))
-                        Text(
-                            text = stringResource(R.string.recipe_ingredients_title),
-                            style = MaterialTheme.typography.titleMedium,
-                        )
-                        if (current.ingredients.isEmpty()) {
-                            Text(
-                                text = stringResource(R.string.ocr_no_ingredients),
-                                style = MaterialTheme.typography.bodyMedium,
-                            )
-                        }
-                        current.ingredients.forEach { line ->
-                            IngredientRow(
-                                line = line,
-                                onNameClick = { pickerKey = line.key },
-                                onAmountChange = { value -> updateIngredient(line.key) { it.copy(amountText = value) } },
-                                onUnitChange = { unit -> updateIngredient(line.key) { it.copy(unit = unit) } },
-                                onRemove = { removeIngredient(line.key) },
-                            )
-                            Spacer(modifier = Modifier.height(8.dp))
-                        }
-                        OutlinedButton(onClick = { addIngredient() }) {
-                            Icon(Icons.Filled.Add, contentDescription = null)
-                            Spacer(modifier = Modifier.width(8.dp))
-                            Text(stringResource(R.string.recipe_add_ingredient))
-                        }
-                        TextButton(onClick = { discard() }) {
-                            Text(stringResource(R.string.ocr_discard))
-                        }
-                    }
+                }
+            }
+            val current = currentDraft
+            if (current != null) {
+                Text(
+                    text = stringResource(R.string.ocr_draft_title),
+                    style = MaterialTheme.typography.titleMedium,
+                )
+                OutlinedTextField(
+                    value = current.name,
+                    onValueChange = { value -> updateDraft { it.copy(name = value) } },
+                    label = { Text(stringResource(R.string.recipe_name_label)) },
+                    modifier = Modifier.fillMaxWidth(),
+                )
+                Row(horizontalArrangement = Arrangement.spacedBy(12.dp)) {
+                    OutlinedTextField(
+                        value = current.yieldText,
+                        onValueChange = { value -> updateDraft { it.copy(yieldText = value) } },
+                        label = { Text(stringResource(R.string.recipe_yield_label)) },
+                        keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Decimal),
+                        modifier = Modifier.weight(1f),
+                    )
+                    OutlinedTextField(
+                        value = current.yieldItem,
+                        onValueChange = { value -> updateDraft { it.copy(yieldItem = value) } },
+                        label = { Text(stringResource(R.string.recipe_yield_item_label)) },
+                        modifier = Modifier.weight(1f),
+                    )
+                }
+                Spacer(modifier = Modifier.height(12.dp))
+                Text(
+                    text = stringResource(R.string.recipe_ingredients_title),
+                    style = MaterialTheme.typography.titleMedium,
+                )
+                if (current.ingredients.isEmpty()) {
+                    Text(
+                        text = stringResource(R.string.ocr_no_ingredients),
+                        style = MaterialTheme.typography.bodyMedium,
+                    )
+                }
+                current.ingredients.forEach { line ->
+                    IngredientRow(
+                        line = line,
+                        onNameClick = { pickerKey = line.key },
+                        onAmountChange = { value -> updateIngredient(line.key) { it.copy(amountText = value) } },
+                        onUnitChange = { unit -> updateIngredient(line.key) { it.copy(unit = unit) } },
+                        onRemove = { removeIngredient(line.key) },
+                    )
+                    Spacer(modifier = Modifier.height(8.dp))
+                }
+                OutlinedButton(onClick = { addIngredient() }) {
+                    Icon(Icons.Filled.Add, contentDescription = null)
+                    Spacer(modifier = Modifier.width(8.dp))
+                    Text(stringResource(R.string.recipe_add_ingredient))
+                }
+                TextButton(onClick = { discard() }) {
+                    Text(stringResource(R.string.ocr_discard))
                 }
             }
             if (permissionDenied) {

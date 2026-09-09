@@ -21,10 +21,8 @@ import com.loopworks.nibblemath.network.PriceLookupClient
 import com.loopworks.nibblemath.network.PriceResult
 import com.loopworks.nibblemath.network.PriceSource
 import com.loopworks.nibblemath.network.RateLimiter
-import java.io.File
 import java.io.IOException
 import kotlinx.coroutines.runBlocking
-import org.junit.After
 import org.junit.Before
 
 abstract class AppTestBase {
@@ -46,6 +44,7 @@ abstract class AppTestBase {
         database = Room.inMemoryDatabaseBuilder(context, NibbleMathDatabase::class.java)
             .allowMainThreadQueries()
             .build()
+        runBlocking { database.clearAllTables() }
         books = BookRepository(database.bookDao(), database.recipeDao())
         recipes = RecipeRepository(
             database.recipeDao(),
@@ -62,15 +61,7 @@ abstract class AppTestBase {
             database.productDao(),
         )
         priceCache = PriceCacheRepository(database.priceCacheDao())
-        File(context.dataStoreDirectory, "settings.preferences_pb").delete()
         settings = SettingsRepository(context)
-    }
-
-    @After
-    fun tearDownApp() {
-        if (::database.isInitialized) {
-            database.close()
-        }
     }
 
     protected fun buildContainer(

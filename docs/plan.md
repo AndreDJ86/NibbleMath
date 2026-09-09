@@ -81,6 +81,22 @@ heart of the app — get it right before any UI.
 - Security pass: gitleaks, network security config (no cleartext), permissions
   justified (CAMERA, INTERNET only)
 
+Stage 3 progress (2026-09-10):
+- Instrumented key-flow suite is green: `MigrationTest`, `BooksFlowTest`,
+  `OcrDraftFlowTest`, `PantryFlowTest`, and `CookFlowTest` (10 tests) pass on
+  `pixel` and `pixel_api26` across 3 consecutive full
+  `connectedDebugAndroidTest` runs.
+- Fixed a Compose state-update race in `PantryScreen`: pantry loading now
+  returns to `Dispatchers.Main` before writing `entries`/`loaded`, preventing
+  the API 26 empty-state flake.
+- `AppTestBase` clears all tables before each test so in-memory Room state does
+  not leak between instrumented tests.
+- Matrix: latest-API and `minSdk` AVDs are covered; tablet AVD is still
+  unavailable in this environment.
+- Security pass completed manually because `gitleaks` is unavailable: no
+  hardcoded secrets, no cleartext traffic, and permissions remain limited to
+  `INTERNET` plus optional `CAMERA`.
+
 ## Stage 4 — UAT (playbook) · ~2–5 days
 
 Signed release APK → real phone via scrcpy → playbook §6.2 checklist →

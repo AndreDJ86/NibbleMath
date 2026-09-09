@@ -45,6 +45,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalLifecycleOwner
 import androidx.compose.ui.platform.LocalLocale
+import androidx.compose.ui.platform.testTag
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.Lifecycle
@@ -83,8 +84,11 @@ fun PantryScreen(
     var useEntry by remember { mutableStateOf<PantryEntry?>(null) }
 
     suspend fun load() {
-        entries = withContext(Dispatchers.IO) { container.pantryRepository.entries() }
-        loaded = true
+        val result = withContext(Dispatchers.IO) { container.pantryRepository.entries() }
+        withContext(Dispatchers.Main) {
+            entries = result
+            loaded = true
+        }
     }
 
     LaunchedEffect(Unit) {
@@ -298,7 +302,7 @@ private fun PantryEntryCard(
     onDelete: () -> Unit,
 ) {
     val locale = LocalLocale.current.platformLocale
-    Card(modifier = Modifier.fillMaxWidth().padding(vertical = 4.dp)) {
+    Card(modifier = Modifier.fillMaxWidth().padding(vertical = 4.dp).testTag("pantry_entry")) {
         Column(Modifier.padding(12.dp)) {
             Text(
                 text = entry.ingredientName,

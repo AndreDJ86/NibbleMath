@@ -64,4 +64,14 @@ class PackSizeTest {
     fun `empty is null`() {
         assertNull(PackSizeParser.parse(""))
     }
+
+    @Test
+    fun `concatenated volume`() {
+        assertEquals(PackSize(3.0, Unit.L), PackSizeParser.parse("3L"))
+    }
+
+    @Test
+    fun `toStringUsesUnitSymbol`() {
+        assertEquals("3.0 L", PackSize(3.0, Unit.L).toString())
+    }
 }

@@ -28,7 +28,7 @@ heart of the app — get it right before any UI.
 | 1.2 | Costing engine | ingredient cost = amount ÷ pack size × pack price; recipe batch cost = Σ; per-item = batch ÷ yield; handles missing price (excluded + flagged) | unit tests: proration, per-item, missing-price, zero-yield |
 | 1.3 | Scaling engine | scale by factor or target servings; practical rounding (whole eggs, ½-tsp increments, 5 g for small amounts); exposes exact + rounded values | unit tests: scale up/down, rounding rules |
 
-## Phase 2 — Data layer · ~3 days
+## Phase 2 — Data layer · ~3 days · done 2026-09-08
 
 | # | Unit | Contents | Done when |
 |---|------|----------|-----------|
@@ -44,6 +44,11 @@ heart of the app — get it right before any UI.
 | 3.3 | Cook view | cost summary (batch + per-item), scale control (servings stepper), ingredient rows with product chip + cost contribution, steps; tap ingredient → product picker (stub: manual price only) | smoke: scale 24→12 cookies, costs halve |
 | 3.4 | Pantry | entries CRUD (ingredient + product + price), "use" → adds to recipe, search | smoke: pantry entry appears in ingredient picker |
 
+- 3.1 done 2026-09-09
+- 3.2 done 2026-09-09
+- 3.3 done 2026-09-09
+- 3.4 done 2026-09-09
+
 ## Phase 4 — Real prices · ~1 week
 
 | # | Unit | Contents | Done when |
@@ -51,6 +56,10 @@ heart of the app — get it right before any UI.
 | 4.1 | Product picker + manual price | attach product (brand, pack size, price) to a recipe ingredient or pantry entry; manual override always available; choice memory per recipe | smoke: pick product → cost updates → reopen recipe, choice remembered |
 | 4.2 | Store adapters | `PriceSource` interface + Woolworths, Coles, ALDI adapters (OkHttp, public product pages, rate-limited, user-initiated only); price cache with ~7-day TTL; offline fallback = last known price; per-store health flag | adapter unit tests against fixture HTML/JSON; manual smoke: live search returns results |
 | 4.3 | Price lookup UI | search box, store filter, results with pack size + $/unit, pick → attach to ingredient/pantry; manual entry fallback row | smoke: search "milk" → pick → cost updates |
+
+- 4.1 done 2026-09-09
+- 4.2 partial 2026-09-09 — `PriceSource`, Woolworths/Coles/ALDI adapters, OkHttp fetcher, rate limiter, lenient JSON/HTML parser, 7-day TTL cache, offline fallback, per-store health, DI wiring, and fixture-based unit tests are green; Woolworths live search now works via `POST /apis/ui/Search/products` after a homepage cookie warm-up, while Coles/ALDI live endpoints still return 404/non-product pages or appear bot-gated.
+- 4.3 done 2026-09-09 — `ProductPickerDialog` has a store search box, All/Woolworths/Coles/ALDI filter, results with price, pack size, and $/unit, pick-to-product attach, and manual entry fallback; `PriceLookupClient.searchStores`, `CostSummary.unitPriceLabel`, and a fake-store `ProductPickerDialog` Compose UI test are green; live smoke searched `"milk"`, picked a Woolworths result, and attached it to the pantry entry; full quality gate is green.
 
 ## Phase 5 — OCR ingestion · ~3–5 days
 

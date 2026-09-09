@@ -1,0 +1,20 @@
+{
+  "products": [
+    {
+      "name": "Test Whole Milk 1L",
+      "price": "$3.50",
+      "packSize": "1 L",
+      "url": "https://example.com/milk"
+    },
+    {
+      "title": "Test Bread 800g",
+      "currentPrice": 2.80,
+      "pack": "800 g"
+    },
+    {
+      "productName": "Test Eggs 12",
+      "offerPrice": "$6.00",
+      "size": "12 dozen"
+    }
+  ]
+}

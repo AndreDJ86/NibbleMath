@@ -1,0 +1,22 @@
+[
+  { "name": "All-purpose flour", "aliases": ["flour", "AP flour"], "unit": "g" },
+  { "name": "Sugar", "aliases": ["white sugar", "caster sugar"], "unit": "g" },
+  { "name": "Brown sugar", "aliases": ["dark brown sugar"], "unit": "g" },
+  { "name": "Butter", "aliases": ["unsalted butter"], "unit": "g" },
+  { "name": "Whole milk", "aliases": ["milk", "full cream milk"], "unit": "ml" },
+  { "name": "Eggs", "aliases": ["egg"], "unit": "count" },
+  { "name": "Baking powder", "aliases": [], "unit": "g" },
+  { "name": "Baking soda", "aliases": ["bicarbonate of soda"], "unit": "g" },
+  { "name": "Salt", "aliases": ["table salt"], "unit": "g" },
+  { "name": "Vanilla extract", "aliases": ["vanilla"], "unit": "ml" },
+  { "name": "Cocoa powder", "aliases": ["cocoa"], "unit": "g" },
+  { "name": "Dark chocolate", "aliases": ["chocolate chips"], "unit": "g" },
+  { "name": "Olive oil", "aliases": ["oil"], "unit": "ml" },
+  { "name": "Honey", "aliases": [], "unit": "g" },
+  { "name": "Yeast", "aliases": ["instant yeast", "dry yeast"], "unit": "g" },
+  { "name": "Onion", "aliases": ["yellow onion"], "unit": "g" },
+  { "name": "Garlic", "aliases": ["garlic cloves"], "unit": "g" },
+  { "name": "Chicken stock", "aliases": ["chicken broth", "chicken bouillon"], "unit": "ml" },
+  { "name": "Tomato paste", "aliases": ["tomato puree"], "unit": "g" },
+  { "name": "Rice", "aliases": ["white rice"], "unit": "g" }
+]

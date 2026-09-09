@@ -5,7 +5,7 @@ data class PackSize(val amount: Double, val unit: Unit) {
     /** Amount in the dimension's base unit (g / ml / count). */
     val amountInBase: Double get() = amount * unit.toBase
 
-    override fun toString(): String = "$amount $unit.symbol"
+    override fun toString(): String = "$amount ${unit.symbol}"
 }
 
 /**
@@ -28,6 +28,7 @@ object PackSizeParser {
 
     fun parse(input: String): PackSize? {
         val tokens = input.trim().lowercase()
+            .replace(Regex("(?<=[0-9])(?=[a-z])"), " ")
             .replace(",", " ")
             .split(Regex("\\s+"))
             .filter { it.isNotEmpty() }

@@ -1,11 +1,18 @@
 package com.loopworks.nibblemath.ui.theme
 
 import androidx.compose.foundation.isSystemInDarkTheme
+import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.Shapes
+import androidx.compose.material3.Typography
 import androidx.compose.material3.darkColorScheme
 import androidx.compose.material3.lightColorScheme
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.text.TextStyle
+import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.unit.dp
+import androidx.compose.ui.unit.sp
 
 private val DarkColors = darkColorScheme(
     primary = Color(0xFF8FD18A),
@@ -49,6 +56,21 @@ private val LightColors = lightColorScheme(
     outlineVariant = Color(0xFFE0E2D8),
 )
 
+private val NibbleMathTypography = Typography(
+    titleLarge = TextStyle(fontSize = 24.sp, fontWeight = FontWeight.SemiBold),
+    titleMedium = TextStyle(fontSize = 18.sp, fontWeight = FontWeight.SemiBold),
+    bodyLarge = TextStyle(fontSize = 16.sp),
+    labelLarge = TextStyle(fontSize = 14.sp, fontWeight = FontWeight.Medium),
+)
+
+private val NibbleMathShapes = Shapes(
+    extraSmall = RoundedCornerShape(4.dp),
+    small = RoundedCornerShape(8.dp),
+    medium = RoundedCornerShape(12.dp),
+    large = RoundedCornerShape(16.dp),
+    extraLarge = RoundedCornerShape(28.dp),
+)
+
 @Composable
 fun NibbleMathTheme(
     darkTheme: Boolean = isSystemInDarkTheme(),
@@ -56,6 +78,8 @@ fun NibbleMathTheme(
 ) {
     MaterialTheme(
         colorScheme = if (darkTheme) DarkColors else LightColors,
+        typography = NibbleMathTypography,
+        shapes = NibbleMathShapes,
         content = content
     )
 }

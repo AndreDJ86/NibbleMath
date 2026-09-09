@@ -68,6 +68,9 @@ heart of the app — get it right before any UI.
 | 5.1 | Camera + gallery capture | permission handling (grant + deny paths), image stored in app files dir | smoke: capture photo |
 | 5.2 | ML Kit OCR + draft parsing | on-device Text Recognition; extract amount + unit + ingredient lines; produce **editable draft** recipe card (human-in-the-loop, never auto-saved); source image deleted after import | parse unit tests on fixture images; smoke: photo of a printed recipe → usable draft |
 
+- 5.1 done 2026-09-09 — `OcrScreen` is reachable from the Books top bar, requests `CAMERA` at runtime, captures via `TakePicturePreview`, imports gallery images via `OpenDocument`, stores images under `files/ocr/`, previews the selected image, and deletes the stored image on Remove; `OcrScreenTest` and the full quality gate are green, and emulator smoke verified the permission prompt, camera capture, stored file, preview, and Remove cleanup.
+- 5.2 done 2026-09-09 — ML Kit Text Recognition runs on-device from `OcrScreen`; `OcrTextParser` extracts recipe name, yield, and amount/unit/ingredient lines; `OcrDraftMapper` produces an editable, never-auto-saved draft with human-in-the-loop ingredient resolution via `IngredientPickerDialog`; Save creates/updates the recipe and deletes the source image, Discard deletes the source image and resets the OCR screen; `OcrTextParserTest`, `OcrScreenTest`, and the full quality gate are green, and emulator smoke verified gallery import of a fixture recipe, ingredient resolution, Save navigation to the recipe editor, source-image cleanup, and Discard cleanup.
+
 ## Stage 3 — Testing (playbook) · ~3–5 days
 
 - Unit: Phases 1–2 + adapter parsing (JVM, `./gradlew test`)

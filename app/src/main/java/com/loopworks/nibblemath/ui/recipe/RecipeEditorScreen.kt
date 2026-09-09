@@ -278,23 +278,28 @@ fun RecipeEditorScreen(
 }
 
 @Composable
-private fun IngredientRow(
+fun IngredientRow(
     line: IngredientDraft,
     onNameClick: () -> Unit,
     onAmountChange: (String) -> Unit,
     onUnitChange: (NibbleUnit) -> Unit,
     onRemove: () -> Unit,
 ) {
-    Row(verticalAlignment = Alignment.CenterVertically, horizontalArrangement = Arrangement.spacedBy(8.dp)) {
-        OutlinedTextField(
-            value = line.ingredientName,
-            onValueChange = {},
-            readOnly = true,
-            label = { Text(stringResource(R.string.ingredient_name_label)) },
-            modifier = Modifier
-                .weight(1f)
-                .clickable(onClick = onNameClick),
-        )
+    Row(
+        modifier = Modifier.fillMaxWidth(),
+        verticalAlignment = Alignment.CenterVertically,
+        horizontalArrangement = Arrangement.spacedBy(8.dp),
+    ) {
+        Box(modifier = Modifier.weight(1f).height(64.dp)) {
+            OutlinedTextField(
+                value = line.ingredientName,
+                onValueChange = {},
+                readOnly = true,
+                label = { Text(stringResource(R.string.ingredient_name_label)) },
+                modifier = Modifier.fillMaxWidth(),
+            )
+            Box(modifier = Modifier.fillMaxSize().clickable(onClick = onNameClick))
+        }
         OutlinedTextField(
             value = line.amountText,
             onValueChange = onAmountChange,
@@ -302,7 +307,11 @@ private fun IngredientRow(
             keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Decimal),
             modifier = Modifier.width(84.dp),
         )
-        UnitSelector(selected = line.unit, onUnitChange = onUnitChange)
+        UnitSelector(
+            selected = line.unit,
+            onUnitChange = onUnitChange,
+            modifier = Modifier.width(120.dp),
+        )
         IconButton(onClick = onRemove) {
             Icon(Icons.Filled.Delete, contentDescription = stringResource(R.string.action_delete))
         }
@@ -310,7 +319,7 @@ private fun IngredientRow(
 }
 
 @Composable
-private fun IngredientPickerDialog(
+fun IngredientPickerDialog(
     container: AppContainer,
     onDismiss: () -> Unit,
     onSelect: (Long, String, NibbleUnit, Product?) -> Unit,

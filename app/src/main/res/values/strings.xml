@@ -86,4 +86,21 @@
     <string name="price_lookup_results_title">Store prices</string>
     <string name="price_lookup_empty">No store prices found</string>
     <string name="price_lookup_searching">Searching stores…</string>
+    <string name="ocr_title">Import recipe</string>
+    <string name="ocr_import">Import</string>
+    <string name="ocr_take_photo">Take photo</string>
+    <string name="ocr_choose_gallery">Choose from gallery</string>
+    <string name="ocr_no_image">No image yet. Take a photo of a recipe or choose one from your gallery.</string>
+    <string name="ocr_take_another">Take another</string>
+    <string name="ocr_remove">Remove</string>
+    <string name="ocr_permission_needed">Camera permission is needed to take a photo.</string>
+    <string name="ocr_copy_failed">Could not open that image.</string>
+    <string name="ocr_image_unavailable">Could not read that image.</string>
+    <string name="ocr_image_preview">Recipe image</string>
+    <string name="ocr_extracting">Reading image…</string>
+    <string name="ocr_failed">Could not read text from that image.</string>
+    <string name="ocr_raw_text">Recognised text</string>
+    <string name="ocr_draft_title">Review recipe</string>
+    <string name="ocr_discard">Discard</string>
+    <string name="ocr_no_ingredients">No ingredients recognised. Add one manually.</string>
 </resources>

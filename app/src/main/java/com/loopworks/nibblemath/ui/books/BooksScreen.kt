@@ -69,6 +69,7 @@ fun BooksScreen(
     onOpenRecipe: (Long) -> Unit,
     onOpenEditor: (Long) -> Unit,
     onOpenPantry: () -> Unit,
+    onOpenOcr: (Long?) -> Unit,
 ) {
     val scope = rememberCoroutineScope()
     var books by remember { mutableStateOf<List<Book>>(emptyList()) }
@@ -137,6 +138,12 @@ fun BooksScreen(
             TopAppBar(
                 title = { Text(stringResource(R.string.app_name)) },
                 actions = {
+                    TextButton(
+                        onClick = { onOpenOcr(selectedBookId) },
+                        enabled = selectedBookId != null,
+                    ) {
+                        Text(stringResource(R.string.ocr_import))
+                    }
                     TextButton(onClick = onOpenPantry) {
                         Text(stringResource(R.string.pantry_title))
                     }
@@ -185,7 +192,9 @@ fun BooksScreen(
                         onAddRecipe = {
                             scope.launch {
                                 val bookId = selectedBookId ?: return@launch
-                                val recipeId = container.recipeRepository.create(bookId, newRecipeName, 1.0, defaultYieldItem)
+                                val recipeId = withContext(Dispatchers.IO) {
+                                    container.recipeRepository.create(bookId, newRecipeName, 1.0, defaultYieldItem)
+                                }
                                 loadRecipes(bookId)
                                 onOpenRecipe(recipeId)
                             }
@@ -225,7 +234,9 @@ fun BooksScreen(
                         onAddRecipe = {
                             scope.launch {
                                 val bookId = selectedBookId ?: return@launch
-                                val recipeId = container.recipeRepository.create(bookId, newRecipeName, 1.0, defaultYieldItem)
+                                val recipeId = withContext(Dispatchers.IO) {
+                                    container.recipeRepository.create(bookId, newRecipeName, 1.0, defaultYieldItem)
+                                }
                                 loadRecipes(bookId)
                                 onOpenRecipe(recipeId)
                             }
@@ -265,7 +276,7 @@ fun BooksScreen(
                         val name = newBookName.trim()
                         showAddBook = false
                         scope.launch {
-                            val id = container.bookRepository.create(name)
+                            val id = withContext(Dispatchers.IO) { container.bookRepository.create(name) }
                             refreshBooks(id)
                         }
                     },
@@ -301,7 +312,7 @@ fun BooksScreen(
                         val id = selectedBook.id
                         showRenameBook = false
                         scope.launch {
-                            container.bookRepository.rename(id, name)
+                            withContext(Dispatchers.IO) { container.bookRepository.rename(id, name) }
                             refreshBooks(id)
                         }
                     },
@@ -328,7 +339,7 @@ fun BooksScreen(
                         val id = selectedBook.id
                         showDeleteBook = false
                         scope.launch {
-                            container.bookRepository.delete(id)
+                            withContext(Dispatchers.IO) { container.bookRepository.delete(id) }
                             refreshBooks()
                         }
                     },

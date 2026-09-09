@@ -6,6 +6,7 @@ import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import com.loopworks.nibblemath.data.di.AppContainer
 import com.loopworks.nibblemath.ui.books.BooksScreen
+import com.loopworks.nibblemath.ui.ocr.OcrScreen
 import com.loopworks.nibblemath.ui.pantry.PantryScreen
 import com.loopworks.nibblemath.ui.recipe.RecipeEditorScreen
 import com.loopworks.nibblemath.ui.recipe.RecipeCookScreen
@@ -16,10 +17,11 @@ object Routes {
     const val EDITOR = "editor/{recipeId}"
     const val PANTRY = "pantry"
     const val PRICE_LOOKUP = "price-lookup"
-    const val OCR = "ocr"
+    const val OCR = "ocr/{bookId}"
 
         fun recipe(recipeId: Long) = "recipe/$recipeId"
     fun editor(recipeId: Long) = "editor/$recipeId"
+    fun ocr(bookId: Long) = "ocr/$bookId"
 }
 
 @Composable
@@ -35,6 +37,28 @@ fun NibbleMathNavHost(container: AppContainer) {
                 onOpenRecipe = { navController.navigate(Routes.recipe(it)) },
                 onOpenEditor = { navController.navigate(Routes.editor(it)) },
                 onOpenPantry = { navController.navigate(Routes.PANTRY) },
+                onOpenOcr = { bookId -> if (bookId != null) navController.navigate(Routes.ocr(bookId)) },
+            )
+        }
+        composable(
+            route = Routes.OCR,
+            arguments = listOf(
+                androidx.navigation.navArgument("bookId") {
+                    type = androidx.navigation.NavType.LongType
+                },
+            ),
+        ) { backStackEntry ->
+            val bookId = backStackEntry.arguments?.getLong("bookId") ?: 0L
+            OcrScreen(
+                container = container,
+                bookId = bookId,
+                onBack = { navController.popBackStack() },
+                onSaved = { recipeId ->
+                    val navOptions = androidx.navigation.NavOptions.Builder()
+                        .setPopUpTo(Routes.BOOKS, false)
+                        .build()
+                    navController.navigate(Routes.editor(recipeId), navOptions)
+                },
             )
         }
         composable(Routes.PANTRY) {

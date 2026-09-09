@@ -1,0 +1,148 @@
+{
+  "didYouMean": null,
+  "noOfResults": 2,
+  "start": 0,
+  "pageSize": 48,
+  "keyword": "milk",
+  "resultType": 1,
+  "searchUid": "test-search-uid",
+  "alternateResult": false,
+  "filters": [],
+  "results": [
+    {
+      "_type": "PRODUCT",
+      "id": 8150288,
+      "adId": null,
+      "adSource": null,
+      "featured": false,
+      "name": "Full Cream Milk",
+      "brand": "Coles",
+      "description": "COLES FULL CREAM MILK 3L",
+      "size": "3L",
+      "availability": true,
+      "availabilityType": "InStoreAndOnline",
+      "availableQuantity": 57,
+      "imageUris": [
+        {
+          "altText": "",
+          "type": "default",
+          "uri": "/8/8150288.jpg"
+        }
+      ],
+      "locations": [
+        {
+          "aisleSide": null,
+          "description": "Aisle information is not available",
+          "facing": 0,
+          "aisle": null,
+          "order": 9999.0,
+          "shelf": null
+        }
+      ],
+      "restrictions": {
+        "retailLimit": 20,
+        "promotionalLimit": 12,
+        "liquorAgeRestrictionFlag": false,
+        "tobaccoAgeRestrictionFlag": false,
+        "restrictedByOrganisation": false,
+        "delivery": [
+          "REMOTE SERVICE",
+          "OVN"
+        ]
+      },
+      "merchandiseHeir": {
+        "tradeProfitCentre": "DAIRY",
+        "categoryGroup": "DAIRY",
+        "category": "DY MILK",
+        "subCategory": "WHOLE WHITE",
+        "className": "WHOLE 3-3.9L"
+      },
+      "onlineHeirs": [
+        {
+          "aisle": "Full Cream Milk",
+          "category": "Milk",
+          "subCategory": "Dairy, Eggs & Fridge",
+          "categoryId": "8881800",
+          "aisleId": "8881801",
+          "subCategoryId": "1300"
+        }
+      ],
+      "pricing": {
+        "now": 4.95,
+        "rawPriceNow": 4.95,
+        "was": 0,
+        "unit": {
+          "quantity": 1.000,
+          "ofMeasureQuantity": 1,
+          "ofMeasureUnits": "l",
+          "price": 1.65,
+          "ofMeasureType": "l",
+          "isWeighted": false,
+          "isIncremental": false
+        },
+        "comparable": "$1.65/ 1L",
+        "onlineSpecial": false
+      },
+      "variations": {
+        "total": 18
+      }
+    },
+    {
+      "_type": "PRODUCT",
+      "id": 1234567,
+      "adId": null,
+      "adSource": null,
+      "featured": false,
+      "name": "Lactose Free Milk",
+      "brand": "Test",
+      "description": "TEST LACTOSE FREE MILK 2L",
+      "size": "2L",
+      "availability": true,
+      "availabilityType": "InStoreAndOnline",
+      "availableQuantity": 10,
+      "imageUris": [
+        {
+          "altText": "",
+          "type": "default",
+          "uri": "/1/1234567.jpg"
+        }
+      ],
+      "locations": [],
+      "restrictions": {
+        "retailLimit": 10,
+        "promotionalLimit": 5,
+        "liquorAgeRestrictionFlag": false,
+        "tobaccoAgeRestrictionFlag": false,
+        "restrictedByOrganisation": false,
+        "delivery": []
+      },
+      "merchandiseHeir": {
+        "tradeProfitCentre": "DAIRY",
+        "categoryGroup": "DAIRY",
+        "category": "DY MILK",
+        "subCategory": "LACTOSE FREE",
+        "className": "LACTOSE FREE 2L"
+      },
+      "onlineHeirs": [],
+      "pricing": {
+        "now": 3.10,
+        "rawPriceNow": 3.10,
+        "was": 0,
+        "unit": {
+          "quantity": 1.000,
+          "ofMeasureQuantity": 1,
+          "ofMeasureUnits": "l",
+          "price": 1.55,
+          "ofMeasureType": "l",
+          "isWeighted": false,
+          "isIncremental": false
+        },
+        "comparable": "$1.55/ 1L",
+        "onlineSpecial": false
+      },
+      "variations": {
+        "total": 0
+      }
+    }
+  ]
+}

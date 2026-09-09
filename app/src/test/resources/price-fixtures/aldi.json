@@ -1,0 +1,196 @@
+{
+  "meta": {
+    "spellingSuggestion": null,
+    "pinned": [],
+    "keywordRedirect": null,
+    "pagination": {
+      "offset": 0,
+      "limit": 30,
+      "totalCount": 3
+    },
+    "debug": null,
+    "facets": []
+  },
+  "data": [
+    {
+      "sku": "000000000111111001",
+      "name": "Full Cream Milk 3L",
+      "brandName": "ALDI",
+      "urlSlugText": "full-cream-milk-3l",
+      "urlSlugTextAlternatives": [],
+      "ageRestriction": null,
+      "alcohol": null,
+      "discontinued": false,
+      "discontinuedNote": null,
+      "notForSale": false,
+      "notForSaleReason": null,
+      "quantityMin": 1,
+      "quantityMax": 99,
+      "quantityInterval": 1,
+      "quantityDefault": 1,
+      "quantityUnit": "ea",
+      "weightType": "0",
+      "sellingSize": "3 L",
+      "energyClass": null,
+      "onSaleDateDisplay": null,
+      "onSaleDate": null,
+      "isAbstract": false,
+      "abstractSku": "000000000000111111",
+      "isDropship": false,
+      "sellingUnitDisplay": null,
+      "price": {
+        "amount": 499,
+        "amountRelevant": 499,
+        "amountRelevantDisplay": "$4.95",
+        "bottleDeposit": 0,
+        "bottleDepositDisplay": "$0.00",
+        "comparison": 165,
+        "comparisonDisplay": "$1.65 per 1 L",
+        "currencyCode": "AUD",
+        "currencySymbol": "$",
+        "perUnit": null,
+        "perUnitDisplay": null,
+        "wasPriceDisplay": null,
+        "additionalInfo": null,
+        "savingsDisplay": null,
+        "bottleDepositType": null,
+        "feeText": null
+      },
+      "countryExtensions": null,
+      "categories": [
+        {
+          "id": "960000000",
+          "name": "Dairy, Eggs & Fridge",
+          "urlSlugText": "dairy-eggs-fridge"
+        },
+        {
+          "id": "1111111160",
+          "name": "Milk",
+          "urlSlugText": "dairy-eggs-fridge/milk"
+        }
+      ],
+      "assets": [],
+      "badges": []
+    },
+    {
+      "sku": "000000000222222002",
+      "name": "Lactose Free Milk 2L",
+      "brandName": "ALDI",
+      "urlSlugText": "lactose-free-milk-2l",
+      "urlSlugTextAlternatives": [],
+      "ageRestriction": null,
+      "alcohol": null,
+      "discontinued": false,
+      "discontinuedNote": null,
+      "notForSale": false,
+      "notForSaleReason": null,
+      "quantityMin": 1,
+      "quantityMax": 99,
+      "quantityInterval": 1,
+      "quantityDefault": 1,
+      "quantityUnit": "ea",
+      "weightType": "0",
+      "sellingSize": "2 L",
+      "energyClass": null,
+      "onSaleDateDisplay": null,
+      "onSaleDate": null,
+      "isAbstract": false,
+      "abstractSku": "000000000000222222",
+      "isDropship": false,
+      "sellingUnitDisplay": null,
+      "price": {
+        "amount": 310,
+        "amountRelevant": 310,
+        "amountRelevantDisplay": "$3.10",
+        "bottleDeposit": 0,
+        "bottleDepositDisplay": "$0.00",
+        "comparison": 155,
+        "comparisonDisplay": "$1.55 per 1 L",
+        "currencyCode": "AUD",
+        "currencySymbol": "$",
+        "perUnit": null,
+        "perUnitDisplay": null,
+        "wasPriceDisplay": null,
+        "additionalInfo": null,
+        "savingsDisplay": null,
+        "bottleDepositType": null,
+        "feeText": null
+      },
+      "countryExtensions": null,
+      "categories": [
+        {
+          "id": "960000000",
+          "name": "Dairy, Eggs & Fridge",
+          "urlSlugText": "dairy-eggs-fridge"
+        },
+        {
+          "id": "1111111160",
+          "name": "Milk",
+          "urlSlugText": "dairy-eggs-fridge/milk"
+        }
+      ],
+      "assets": [],
+      "badges": []
+    },
+    {
+      "sku": "000000000333333003",
+      "name": "Whole Milk 3L",
+      "brandName": "ALDI",
+      "urlSlugText": "whole-milk-3l",
+      "urlSlugTextAlternatives": [],
+      "ageRestriction": null,
+      "alcohol": null,
+      "discontinued": false,
+      "discontinuedNote": null,
+      "notForSale": true,
+      "notForSaleReason": null,
+      "quantityMin": 1,
+      "quantityMax": 99,
+      "quantityInterval": 1,
+      "quantityDefault": 1,
+      "quantityUnit": "ea",
+      "weightType": "0",
+      "sellingSize": "3 L",
+      "energyClass": null,
+      "onSaleDateDisplay": null,
+      "onSaleDate": null,
+      "isAbstract": false,
+      "abstractSku": "0000000000003333",
+      "isDropship": false,
+      "sellingUnitDisplay": null,
+      "price": {
+        "amount": 499,
+        "amountRelevant": 499,
+        "amountRelevantDisplay": "$4.95",
+        "bottleDeposit": 0,
+        "bottleDepositDisplay": "$0.00",
+        "comparison": 165,
+        "comparisonDisplay": "$1.65 per 1 L",
+        "currencyCode": "AUD",
+        "currencySymbol": "$",
+        "perUnit": null,
+        "perUnitDisplay": null,
+        "wasPriceDisplay": null,
+        "additionalInfo": null,
+        "savingsDisplay": null,
+        "bottleDepositType": null,
+        "feeText": null
+      },
+      "countryExtensions": null,
+      "categories": [
+        {
+          "id": "960000000",
+          "name": "Dairy, Eggs & Fridge",
+          "urlSlugText": "dairy-eggs-fridge"
+        },
+        {
+          "id": "1111111160",
+          "name": "Milk",
+          "urlSlugText": "dairy-eggs-fridge/milk"
+        }
+      ],
+      "assets": [],
+      "badges": []
+    }
+  ]
+}

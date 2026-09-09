@@ -50,6 +50,48 @@ class PriceParserTest {
     }
 
     @Test
+    fun parsesColesJson() {
+        val body = TestFixtures.load("coles.json")
+        val results = PriceParser.parse(body, "Coles", now = 123L)
+
+        assertEquals(2, results.size)
+        val milk = results.first { it.productName == "Full Cream Milk" }
+        assertEquals("Coles", milk.store)
+        assertEquals(4.95, milk.price)
+        assertEquals(PackSize(3.0, Unit.L), milk.packSize)
+        assertEquals(123L, milk.fetchedAt)
+
+        val lactoseFree = results.first { it.productName == "Lactose Free Milk" }
+        assertEquals(3.10, lactoseFree.price)
+        assertEquals(PackSize(2.0, Unit.L), lactoseFree.packSize)
+    }
+
+    @Test
+    fun parsesAldiJson() {
+        val body = TestFixtures.load("aldi.json")
+        val results = PriceParser.parse(body, "ALDI", now = 123L)
+
+        assertEquals(3, results.size)
+        val milk = results.first { it.productName == "Full Cream Milk 3L" }
+        assertEquals("ALDI", milk.store)
+        assertEquals(4.95, milk.price)
+        assertEquals(PackSize(3.0, Unit.L), milk.packSize)
+        assertEquals(
+            "https://www.aldi.com.au/product/full-cream-milk-3l-000000000111111001",
+            milk.url,
+        )
+        assertEquals(123L, milk.fetchedAt)
+
+        val lactoseFree = results.first { it.productName == "Lactose Free Milk 2L" }
+        assertEquals(3.10, lactoseFree.price)
+        assertEquals(PackSize(2.0, Unit.L), lactoseFree.packSize)
+
+        val wholeMilk = results.first { it.productName == "Whole Milk 3L" }
+        assertEquals(4.95, wholeMilk.price)
+        assertEquals(PackSize(3.0, Unit.L), wholeMilk.packSize)
+    }
+
+    @Test
     fun parsesEmbeddedHtmlJson() {
         val body = TestFixtures.load("embedded.html")
         val results = PriceParser.parse(body, "TestStore", now = 1L)

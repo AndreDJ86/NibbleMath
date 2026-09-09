@@ -86,7 +86,7 @@ object PriceParser {
             obj.containsKey("offerPrice") ||
             obj.containsKey("sellingPrice") ||
             obj.containsKey("priceValue")
-        return hasName && hasPrice
+        return hasName && (hasPrice || hasColesPricing(obj))
     }
 
     private fun parseProduct(obj: JsonObject, store: String, now: Long): PriceResult? {
@@ -99,14 +99,17 @@ object PriceParser {
                 obj["Name"],
         )?.trim().orEmpty()
         if (name.isEmpty()) return null
+        if (booleanOf(obj["discontinued"])) return null
 
         val price = parsePrice(
-            obj["Price"] ?:
+            aldiPrice(obj) ?:
+                obj["Price"] ?:
                 obj["price"] ?:
                 obj["currentPrice"] ?:
                 obj["offerPrice"] ?:
                 obj["sellingPrice"] ?:
-                obj["priceValue"],
+                obj["priceValue"] ?:
+                colesPrice(obj),
         ) ?: return null
 
         val packText = stringOf(
@@ -114,6 +117,7 @@ object PriceParser {
                 obj["packSize"] ?:
                 obj["pack"] ?:
                 obj["size"] ?:
+                obj["sellingSize"] ?:
                 obj["packSizeText"] ?:
                 obj["unitSize"] ?:
                 obj["CupMeasure"] ?:
@@ -121,9 +125,10 @@ object PriceParser {
         )?.trim()
         val packSize = packText?.let { PackSizeParser.parse(it) }
 
-        val url = stringOf(obj["url"] ?: obj["link"] ?: obj["href"])
-            ?.trim()
-            ?.ifEmpty { null }
+        val url = aldiUrl(obj)
+            ?: stringOf(obj["url"] ?: obj["link"] ?: obj["href"])
+                ?.trim()
+                ?.ifEmpty { null }
 
         return PriceResult(
             store = store,
@@ -134,6 +139,37 @@ object PriceParser {
             fetchedAt = now,
         )
     }
+
+    private fun hasColesPricing(obj: JsonObject): Boolean {
+        val pricing = obj["pricing"] as? JsonObject ?: return false
+        return pricing.containsKey("now") || pricing.containsKey("rawPriceNow")
+    }
+
+    private fun colesPrice(obj: JsonObject): JsonElement? =
+        (obj["pricing"] as? JsonObject)
+            ?.get("now")
+            ?: (obj["pricing"] as? JsonObject)
+                ?.get("rawPriceNow")
+
+    private fun aldiPrice(obj: JsonObject): JsonElement? {
+        val price = obj["price"] as? JsonObject ?: return null
+        stringOf(price["amountRelevantDisplay"] ?: price["amountDisplay"])?.let { display ->
+            return JsonPrimitive(display)
+        }
+        val cents = (price["amountRelevant"] ?: price["amount"])
+            ?.let { (it as? JsonPrimitive)?.content?.toDoubleOrNull() }
+            ?: return null
+        return JsonPrimitive(cents / 100.0)
+    }
+
+    private fun aldiUrl(obj: JsonObject): String? {
+        val slug = stringOf(obj["urlSlugText"])?.trim()?.ifEmpty { null } ?: return null
+        val sku = stringOf(obj["sku"])?.trim()?.ifEmpty { null } ?: return null
+        return "https://www.aldi.com.au/product/$slug-$sku"
+    }
+
+    private fun booleanOf(element: JsonElement?): Boolean =
+        element is JsonPrimitive && element.content.equals("true", ignoreCase = true)
 
     private fun stringOf(element: JsonElement?): String? = when (element) {
         is JsonPrimitive -> if (element.isString) element.content else null

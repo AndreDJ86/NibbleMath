@@ -49,31 +49,38 @@ class StoreAdapterTest {
 
     @Test
     fun colesAdapterParsesFixtureAndSendsUserAgent() = runBlocking {
-        val fetcher = FakePriceFetcher(TestFixtures.load("embedded.html"))
-        val adapter = ColesAdapter(fetcher)
+        val fetcher = FakePriceFetcher(TestFixtures.load("coles.json"))
+        val adapter = ColesAdapter(fetcher, ColesApiKeyProvider { "test-key" })
 
-        val results = adapter.search("bread")
+        val results = adapter.search("milk")
 
         assertTrue(results.isNotEmpty())
         assertEquals("Coles", adapter.store)
         assertEquals("Coles", results.first().store)
         assertNotNull(fetcher.lastUrl)
-        assertTrue(fetcher.lastUrl!!.startsWith("https://www.coles.com.au/search?query="))
+        assertTrue(fetcher.lastUrl!!.startsWith("https://www.coles.com.au/api/bff/products/search?searchTerm=milk"))
+        assertTrue(fetcher.lastUrl!!.contains("storeId=840"))
+        assertEquals("test-key", fetcher.lastHeaders["Ocp-Apim-Subscription-Key"])
         assertTrue(fetcher.lastHeaders.containsKey("User-Agent"))
     }
 
     @Test
     fun aldiAdapterParsesFixtureAndSendsUserAgent() = runBlocking {
-        val fetcher = FakePriceFetcher(TestFixtures.load("products.json"))
+        val fetcher = FakePriceFetcher(TestFixtures.load("aldi.json"))
         val adapter = AldiAdapter(fetcher)
 
-        val results = adapter.search("eggs")
+        val results = adapter.search("milk")
 
         assertTrue(results.isNotEmpty())
         assertEquals("ALDI", adapter.store)
         assertEquals("ALDI", results.first().store)
         assertNotNull(fetcher.lastUrl)
-        assertTrue(fetcher.lastUrl!!.startsWith("https://www.aldi.com.au/search?q="))
+        assertTrue(fetcher.lastUrl!!.startsWith("https://asl.api.aldi.com.au/commerce/v3/product-search?q=milk"))
+        assertTrue(fetcher.lastUrl!!.contains("limit=30"))
+        assertTrue(fetcher.lastUrl!!.contains("currency=AUD"))
+        assertTrue(fetcher.lastUrl!!.contains("serviceType=walk-in"))
         assertTrue(fetcher.lastHeaders.containsKey("User-Agent"))
+        assertTrue(fetcher.lastHeaders.containsKey("Origin"))
+        assertTrue(fetcher.lastHeaders.containsKey("Sec-Fetch-Mode"))
     }
 }

@@ -122,8 +122,13 @@ Stage 3 progress (2026-09-10):
 Signed release APK → real phone via scrcpy → playbook §6.2 checklist →
 sign-off recorded → tag `vX.Y.0`.
 
-Status 2026-09-10: signed release APK is built, verified, and smoke-tested on
-the available emulators; real-phone/scrcpy UAT and sign-off remain.
+Status 2026-09-10: real-device UAT on the Pixel 8 Pro is complete — all 12
+playbook §6.2 checklist items pass (see `docs/uat-2026-09-10.md`), including a
+valid 30-minute foreground screen-on battery/data soak (−2% battery, zero app
+data usage, no crashes). The only remaining item is a packaging decision:
+sign off the current `0.0.0-dev` build as the UAT baseline, or rebuild with a
+proper RC `versionName`/`versionCode` (e.g. `0.1.0-rc.1` / `10100`) before the
+final sign-off and `vX.Y.0` tag.
 
 ## Stage 5 — Play
 

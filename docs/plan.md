@@ -96,6 +96,16 @@ Stage 3 progress (2026-09-10):
 - Security pass completed manually because `gitleaks` is unavailable: no
   hardcoded secrets, no cleartext traffic, and permissions remain limited to
   `INTERNET` plus optional `CAMERA`.
+- Performance baseline recorded on 2026-09-10 with the debug APK on the two
+  available emulators (`emulator-5554`: API 36 / Android 16, 1080x2400;
+  `emulator-5556`: API 26 / Android 8.0, 1080x1920). After one discarded
+  first-launch warm-up, five cold starts produced `am start -W` TotalTime
+  results of 659, 672, 694, 666, and 665 ms on API 36 (median 666 ms) and 511,
+  503, 502, 525, and 491 ms on API 26 (median 503 ms). Three idle memory
+  samples after launch were 86.2, 86.5, and 86.6 MB TOTAL PSS on API 36 and
+  50.1, 50.0, and 50.2 MB TOTAL on API 26. These are debug-build emulator
+  numbers; no Baseline Profile is added yet, but revisit if release cold start
+  or memory regresses noticeably.
 
 ## Stage 4 — UAT (playbook) · ~2–5 days
 

@@ -106,11 +106,24 @@ Stage 3 progress (2026-09-10):
   50.1, 50.0, and 50.2 MB TOTAL on API 26. These are debug-build emulator
   numbers; no Baseline Profile is added yet, but revisit if release cold start
   or memory regresses noticeably.
+- Signed release verification on 2026-09-10: a replacement upload keystore was
+  generated because the original password was unrecoverable; no release had
+  been published with the old key. `apksigner verify --print-certs` succeeded
+  for SHA-256
+  `4016a646ab6637a1fe153f6be8bbc066baf99e062c9f44ad82d5bab640674db8`. The
+  signed APK installed and launched on both emulators. Five release cold starts
+  after the first launch were 303, 298, 312, 322, and 332 ms on API 36 (median
+  312 ms) and 369, 354, 370, 381, and 365 ms on API 26 (median 369 ms). Three
+  idle release memory samples were 28.5, 26.9, and 26.9 MB TOTAL PSS on API 36
+  and 23.5, 23.4, and 23.6 MB TOTAL on API 26.
 
 ## Stage 4 — UAT (playbook) · ~2–5 days
 
 Signed release APK → real phone via scrcpy → playbook §6.2 checklist →
 sign-off recorded → tag `vX.Y.0`.
+
+Status 2026-09-10: signed release APK is built, verified, and smoke-tested on
+the available emulators; real-phone/scrcpy UAT and sign-off remain.
 
 ## Stage 5 — Play
 

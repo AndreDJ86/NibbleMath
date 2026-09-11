@@ -5,7 +5,7 @@
 | **Status** | draft |
 | **Date** | 2026-09-08 |
 | **Author** | Andre |
-| **Repo** | `/mnt/storage/Git/NibbleMath` (own git history, own GitHub repo) |
+| **Repo** | `/home/andre/git/NibbleMath` (own git history, own GitHub repo) |
 
 ---
 
